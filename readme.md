@@ -1,7 +1,7 @@
-[TOC]
+﻿[TOC]
 
-#前端自动化测试Jasmine+Karma+Travis实践
-  <!-- 背景几种相关概念headless+CI+单元测试 ， 本文假定了解grunt，jasmine与单元测试的基本概念。-->
+#前端自动化测试Jasmine+Karma+TravisCI实践
+  
   &emsp;&emsp;单元测试在软件开发过程中是一个很重要的环节， 不仅因为它能减少后续代码修改造成错误的风险， 
   而且它还是开发者理解需求， 协助自己开发的有力助手。 随着Javascript的发展， 它的测试工具也已经非常完善，
  开发者可以很轻松的借助这些工具完成单元测试。
@@ -80,6 +80,8 @@ module.exports = function (config) {
 
 ##2.自动化测试环境搭建
 &emsp;&emsp;在进行下面工具安装前， 请先安装好[NodeJS](http://www.nodejs.org/)和[Grunt](http://gruntjs.com/)。
+
+     源码可在https://github.com/nupthale/jasmine_karma_travis下载
 
 ###2.1 创建项目
 &emsp;&emsp;`1` 在`github`上新建一个空repo， 然后clone到本地目录， 在目录中创建如下目录结构：
@@ -194,8 +196,8 @@ module.exports = function(config) {
 
 &emsp;&emsp;如果你不需要集成CI， 那么到这步，本地测试的自动化已经实现。
 
-&emsp;&emsp;已经安装了`PhantomJS`的读者， 现在可以运行`karma start`或者`karma start karma.conf.js`就会看到测试结果。至于Karma是如何找到本地浏览器位置的， 请参见[Correct path to browser binary](http://karma-runner.github.io/0.8/config/browsers.html);
-PhantomJS的安装方法可见[PhantomJS官网](http://phantomjs.org/)， 安装过后别忘记将phantomjs命令加入到环境变量中， 上面的配置针对集成CI做了调整， 可以根据自己需要修改Karma的配置。
+&emsp;&emsp;现在可以运行`karma start`或者`karma start karma.conf.js`就会看到测试结果。至于Karma是如何找到本地浏览器位置的， 请参见[Correct path to browser binary](http://karma-runner.github.io/0.8/config/browsers.html);
+上面的配置针对集成CI做了调整， 可以根据自己需要修改Karma的配置。
 
 ####2.3.2 配置Travis CI
 &emsp;&emsp;要使用Travis CI， 需要在git repo首级目录中增加一个`.travis.yml`文件， 在这个文件中配置项目所使用的语言、运行环境、构建工具、构建脚本等。最重要的是设置语言， 
@@ -314,4 +316,9 @@ A:
 Q: Travis CI中提示`karma-jasmine`支持的最大版本为`0.2.2`？
 
 A: 如果直接使用`npm install -D karma-jasmine`安装， 安装的版本可能大于`0.2.2`， 在`package.json`中设置karma-jasmine的版本不要大于0.2.2即可， 可以设置为`~0.2.2`。
+*****
+Q: Travis CI网站提示证书错误， 无法登陆？
 
+A:
+
+可以在[完整代码]()上下载`travis-ci.cer.p7b`文件， 然后将其导入到`Chrome`浏览器的受信任的根证书颁发机构中，重启浏览器即可正常访问了。导入证书方法：设置->高级->管理证书->切换到受信任的根证书颁发机构->导入->选择`travis-ci.cer..p7b`文件， 下一步直到导入成功。
