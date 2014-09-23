@@ -1,0 +1,13 @@
+{
+  "name": "test",
+  "version": "0.0.1",
+  "scripts": {
+    "test": "./node_modules/karma/bin/karma start karma.conf.js"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "karma": "^0.12.23",
+    "karma-jasmine": "~0.2.2",
+    "karma-phantomjs-launcher": "^0.1.4"
+  }
+}
